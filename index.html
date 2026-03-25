@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute To-Do List ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-light">
+    <div class="layout-wrapper">
+        <!-- Pet Companion -->
+        <div id="pet-companion" class="pet-wrapper idle">
+            <div class="pet-message-bubble" id="pet-message">Zzz...</div>
+            <svg class="cat-svg" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+                <!-- Tail -->
+                <path class="cat-tail" d="M 140 160 Q 180 160 180 110 Q 180 80 150 80" fill="none" stroke="#ff9eab" stroke-width="16" stroke-linecap="round"/>
+                <!-- Body -->
+                <path class="cat-body" d="M 40 170 Q 30 90 100 90 Q 170 90 160 170 Z" fill="#ffb6c1"/>
+                <!-- Belly -->
+                <path class="cat-belly" d="M 70 170 Q 70 130 100 130 Q 130 130 130 170 Z" fill="#fff0f5"/>
+                <!-- Head -->
+                <circle class="cat-head" cx="100" cy="85" r="50" fill="#ffb6c1"/>
+                <!-- Ears -->
+                <g class="cat-ears">
+                    <path d="M 60 55 L 45 10 L 85 40 Z" fill="#ffb6c1"/>
+                    <path d="M 140 55 L 155 10 L 115 40 Z" fill="#ffb6c1"/>
+                    <path d="M 62 52 L 50 20 L 78 42 Z" fill="#ff9eab"/>
+                    <path d="M 138 52 L 150 20 L 122 42 Z" fill="#ff9eab"/>
+                </g>
+                <!-- Face features -->
+                <g class="cat-face">
+                    <circle cx="65" cy="95" r="8" fill="#ff9eab" opacity="0.7"/>
+                    <circle cx="135" cy="95" r="8" fill="#ff9eab" opacity="0.7"/>
+                    <path d="M 95 95 Q 100 100 105 95 Z" fill="#ff9eab"/>
+                    <path class="cat-mouth" d="M 95 98 Q 100 105 105 98" fill="none" stroke="#5c5c5c" stroke-width="2" stroke-linecap="round"/>
+                    <path class="cat-mouth-happy hidden" d="M 95 98 Q 100 110 105 98 Z" fill="#ff9eab"/>
+                    
+                    <g class="cat-eyes-idle hidden">
+                        <path d="M 65 85 Q 75 95 85 85" fill="none" stroke="#5c5c5c" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 115 85 Q 125 95 135 85" fill="none" stroke="#5c5c5c" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                    
+                    <g class="cat-eyes-working">
+                        <circle cx="75" cy="85" r="8" fill="#5c5c5c"/>
+                        <circle cx="125" cy="85" r="8" fill="#5c5c5c"/>
+                        <circle cx="72" cy="83" r="3" fill="#ffffff"/>
+                        <circle cx="122" cy="83" r="3" fill="#ffffff"/>
+                    </g>
+                    
+                    <g class="cat-eyes-happy hidden">
+                        <path d="M 65 85 Q 75 75 85 85" fill="none" stroke="#5c5c5c" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 115 85 Q 125 75 135 85" fill="none" stroke="#5c5c5c" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <!-- Paws -->
+                <g class="cat-paws">
+                    <circle class="paw-left" cx="70" cy="165" r="14" fill="#ffffff"/>
+                    <circle class="paw-right" cx="130" cy="165" r="14" fill="#ffffff"/>
+                    <g class="paw-play hidden">
+                        <path d="M 100 140 Q 130 110 160 140" fill="none" stroke="#ffffff" stroke-width="17" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <!-- Yarn Ball -->
+                <g class="yarn-ball hidden">
+                    <circle cx="165" cy="160" r="15" fill="#aaddcc"/>
+                    <path d="M 155 150 Q 165 170 175 150" fill="none" stroke="#8bcaa8" stroke-width="2"/>
+                    <path d="M 155 160 Q 165 180 175 160" fill="none" stroke="#8bcaa8" stroke-width="2"/>
+                    <path d="M 160 150 Q 180 160 160 170" fill="none" stroke="#8bcaa8" stroke-width="2"/>
+                    <path d="M 165 175 Q 140 185 110 165" fill="none" stroke="#aaddcc" stroke-width="4" stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+        <div class="app-container">
+            <header class="header">
+                <h1>My Tasks 🌸</h1>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                    <span class="icon">🌙</span>
+                </button>
+            </header>
+
+            <div class="progress-section">
+                <div class="progress-text" id="progress-text">0/0 tasks done</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-row-top">
+                    <input type="text" id="task-input" placeholder="What needs to be done? ✨" autocomplete="off">
+                    <button id="add-btn" class="primary-btn">Add</button>
+                </div>
+                <div class="input-row-bottom">
+                    <div class="option-pill" title="Pomodoro Timer (Minutes)">
+                        <span class="option-icon">🍅</span>
+                        <input type="number" id="pomodoro-input" class="pomodoro-input" placeholder="25 min" min="1" max="180">
+                    </div>
+                    <div class="option-pill" title="Set Reminder">
+                        <span class="option-icon">⏰</span>
+                        <input type="datetime-local" id="reminder-input" class="reminder-input">
+                    </div>
+                </div>
+            </div>
+
+            <ul id="task-list" class="task-list">
+                <!-- Tasks will be injected here -->
+            </ul>
+
+            <div id="empty-state" class="empty-state hidden">
+                <div class="empty-icon">🎉</div>
+                <p>You're all caught up ✨</p>
+            </div>
+
+            <button id="day-complete-btn" class="day-complete-btn">🌙 Day Complete</button>
+        </div>
+    </div>
+
+    <!-- Analytics Modal -->
+    <div id="analytics-modal" class="analytics-modal hidden">
+        <div class="analytics-content">
+            <button id="close-analytics" class="close-analytics-btn">✕</button>
+            <h2 class="analytics-title">📊 Your Day In Review</h2>
+
+            <div class="analytics-score-section">
+                <div class="score-circle" id="score-circle">
+                    <span class="score-value" id="score-value">0%</span>
+                </div>
+                <p class="score-label">Productivity Score</p>
+            </div>
+
+            <div class="analytics-stats">
+                <div class="stat-card completed-card">
+                    <span class="stat-icon">✅</span>
+                    <span class="stat-number" id="stat-completed">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-card pending-card">
+                    <span class="stat-icon">⏳</span>
+                    <span class="stat-number" id="stat-pending">0</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+                <div class="stat-card time-card">
+                    <span class="stat-icon">⏱️</span>
+                    <span class="stat-number" id="stat-total-time">0m</span>
+                    <span class="stat-label">Total Time</span>
+                </div>
+            </div>
+
+            <div class="analytics-details">
+                <div class="detail-section" id="longest-task-section">
+                    <h3>🐢 Longest Task</h3>
+                    <p id="longest-task-text">—</p>
+                </div>
+                <div class="detail-section" id="quickest-task-section">
+                    <h3>⚡ Quickest Task</h3>
+                    <p id="quickest-task-text">—</p>
+                </div>
+                <div class="detail-section" id="ontime-section">
+                    <h3>🎯 On-Time Tasks</h3>
+                    <p id="ontime-text">—</p>
+                </div>
+                <div class="detail-section" id="pending-list-section">
+                    <h3>📋 Still Pending</h3>
+                    <ul id="pending-list"></ul>
+                </div>
+            </div>
+
+            <button id="clear-day-btn" class="primary-btn clear-day-btn">🌅 Start Fresh Tomorrow</button>
+        </div>
+    </div>
+
+    <!-- Template for a task item -->
+    <template id="task-template">
+        <li class="task-item">
+            <label class="checkbox-container">
+                <input type="checkbox" class="task-checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <div class="task-content">
+                <span class="task-text"></span>
+                <div class="task-meta">
+                    <div class="timer-container">
+                        <button class="timer-btn play-btn" aria-label="Start Timer">
+                            <svg class="timer-icon play-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="timer-icon pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                        <span class="timer-display">00:00</span>
+                    </div>
+                    <div class="pomodoro-display hidden">
+                        <span class="icon">🍅</span>
+                        <span class="pomodoro-time-text"></span>
+                    </div>
+                    <div class="reminder-display hidden">
+                        <span class="icon">⏰</span>
+                        <span class="reminder-time-text"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="delete-btn icon-btn" aria-label="Delete Task">
+                <span class="icon">❌</span>
+            </button>
+        </li>
+    </template>
+
+    <!-- Full Screen Alarm Modal -->
+    <div id="alarm-modal" class="alarm-modal hidden">
+        <div class="alarm-content">
+            <h1 class="alarm-title">⏰ Time's Up!</h1>
+            <p id="alarm-task-name" class="alarm-task-name">Task Name</p>
+            <button id="dismiss-alarm-btn" class="primary-btn dismiss-btn">Dismiss</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
